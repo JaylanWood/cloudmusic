@@ -8,7 +8,35 @@
 </head>
 
 <body>
-    
+
+    <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
+    <script src="./js/leanCloudKeyInit.js"></script>
+    <script>
+        // LeanCloud 存储对象
+        var Song = AV.Object.extend('Song');
+        var song = new Song();
+        song.set({
+            name: 'song1',
+            artist: 'artist1',
+            url: 'url1'
+        });
+        song.save().then(function (song) {
+            console.log('song保存成功。')
+        })
+
+        var Songlist = AV.Object.extend('SongList');
+        var songlist = new Songlist();
+        songlist.set({
+            name: 'songlist1',
+            cover: 'cover1',
+            editorId: 'editor1',
+            description: 'description1',
+            songs: ['song1', 'song2']
+        });
+        songlist.save().then(function (songlist) {
+            console.log('songlist保存成功。')
+        })
+    </script>
 </body>
 
 </html>

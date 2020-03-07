@@ -1,0 +1,22 @@
+{
+  "name": "cloudmusic",
+  "version": "1.0.0",
+  "description": "## 简介",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaylanWood/cloudmusic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaylanWood/cloudmusic/issues"
+  },
+  "homepage": "https://github.com/JaylanWood/cloudmusic#readme",
+  "dependencies": {
+    "leancloud-storage": "^4.2.0"
+  }
+}
