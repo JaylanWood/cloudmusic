@@ -1,2 +1,3 @@
 /node_modules
 /src/js/leanCloudKeyInit.js
+/qiniu-config.json
