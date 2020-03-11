@@ -14,7 +14,7 @@
                 songs
             } = data
             let liList = songs.map((song) => {
-                return $('<li></li>').text(song.name)
+                return $('<li></li>').text(song.name).attr('data-song-id', song.id)
             })
             // 把li数组放到ul上
             $el.find('ul').empty()
@@ -25,6 +25,10 @@
         clearActive() {
             $(this.el).find('.active').removeClass('active')
         },
+        activeItem(li) {
+            let $li = $(li)
+            $li.addClass('active').siblings('.active').removeClass('active')
+        }
     }
     let model = {
         data: {
@@ -53,19 +57,25 @@
             this.getAllSongs()
         },
         getAllSongs() {
-            this.model.find().then(() => {
+            return this.model.find().then(() => {
                 this.view.render(this.model.data)
             })
         },
         bindEvents() {
-
+            $(this.view.el).on('click', 'li', (eee) => {
+                let $li = $(eee.currentTarget)
+                this.view.activeItem($li)
+                let songID = $li.attr('data-song-id')
+                window.eventHub.emit('select', {
+                    id: songID
+                })
+            })
         },
         bindEvenHub() {
             window.eventHub.on('upload', () => {
                 this.view.clearActive()
             })
             window.eventHub.on('create', (songData) => {
-
                 this.model.data.songs.push(songData)
                 this.view.render(this.model.data)
             })
