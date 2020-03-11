@@ -16,9 +16,10 @@ button{font:inherit;}
 .page>aside{display:flex;flex-direction:column;}
 .page>aside>.newSong{text-align:center;padding:10px;}
 .page>aside>.newSong.active{background:#d4d4d4;}
-.page>aside>.songList{flex-grow:1;text-align:left;border-top:1px solid #999;}
-.page>aside>.songList>li{border-bottom:1px solid #ddd;padding:10px;}
-.page>aside>.songList>li.active{background:#d4d4d4;}
+.page>aside>#songList-container{flex-grow:1;}
+.page>aside>#songList-container>.songList{text-align:left;border-top:1px solid #999;}
+.page>aside>#songList-container>.songList>li{border-bottom:1px solid #ddd;padding:10px;}
+.page>aside>#songList-container>.songList>li.active{background:#d4d4d4;}
 .page>aside>.uploadArea>.dragArea{text-align:center;border:2px dashed #ddd;display:flex;align-items:center;justify-content:center;flex-direction:column;border-radius:5px;}
 .page>aside>.uploadArea>.dragArea>.clickArea{cursor:pointer;border-radius:5px;width:100%;padding:20px;border-radius:5px;}
 /* main */
