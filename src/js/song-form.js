@@ -66,6 +66,18 @@
                 }
             })
         },
+        update(data) {
+            var song = AV.Object.createWithoutData('Song', this.data.id);
+            song.set({
+                name: data.name,
+                artist: data.artist,
+                url: data.url
+            });
+            return song.save().then((response) => {
+                Object.assign(this.data, data)
+                return response
+            })
+        }
 
     }
     let controller = {
@@ -88,22 +100,39 @@
                 this.view.render(this.model.data)
             })
         },
+        create() {
+            let needs = ['name', 'artist', 'url']
+            let data = {}
+            needs.map((string) => {
+                data[string] = this.view.$el.find(`[name="${string}"]`).val()
+            })
+            this.model.create(data).then(() => {
+                this.view.reset()
+                // 把data深拷贝，以免data被song-form以外的人改
+                let string = JSON.stringify(this.model.data)
+                let object = JSON.parse(string)
+                window.eventHub.emit('create', object)
+
+            })
+        },
+        update() {
+            let needs = ['name', 'artist', 'url']
+            let data = {}
+            needs.map((string) => {
+                data[string] = this.view.$el.find(`[name="${string}"]`).val()
+            })
+            this.model.update(data).then(() => {
+                window.eventHub.emit('update', JSON.parse(JSON.stringify(this.model.data)))
+            })
+        },
         bindEvents() {
             this.view.$el.on('submit', 'form', (eee) => {
                 eee.preventDefault()
-                let needs = ['name', 'artist', 'url']
-                let data = {}
-                needs.map((string) => {
-                    data[string] = this.view.$el.find(`[name="${string}"]`).val()
-                })
-                this.model.create(data).then(() => {
-                    this.view.reset()
-                    // 把data深拷贝，以免data被song-form以外的人改
-                    let string = JSON.stringify(this.model.data)
-                    let object = JSON.parse(string)
-                    window.eventHub.emit('create', object)
-
-                })
+                if (this.model.data.id) {
+                    this.update()
+                } else {
+                    this.create()
+                }
             })
         }
 
