@@ -66,9 +66,15 @@
                 let $li = $(eee.currentTarget)
                 this.view.activeItem($li)
                 let songID = $li.attr('data-song-id')
-                window.eventHub.emit('select', {
-                    id: songID
-                })
+                let data
+                let songs = this.model.data.songs
+                for (let i = 0; i < songs.length; i++) {
+                    if (songs[i].id === songID) {
+                        data = songs[i]
+                        break
+                    }
+                }
+                window.eventHub.emit('select', JSON.parse(JSON.stringify(data)))
             })
         },
         bindEvenHub() {
