@@ -15,19 +15,18 @@
             this.model = model
             this.view.render(this.model.data)
             this.active()
-            window.eventHub.on('upload', (data) => {
+            window.eventHub.on('new', (data) => {
                 this.active()
             })
             window.eventHub.on('select', (data) => {
                 this.deactive()
             })
             $(this.view.el).on('click', () => {
-                this.active()
+                window.eventHub.emit('new')
             })
         },
         active() {
             $(this.view.el).addClass('active')
-            window.eventHub.emit('new')
         },
         deactive() {
             $(this.view.el).removeClass('active')

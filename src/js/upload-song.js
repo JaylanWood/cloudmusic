@@ -53,7 +53,7 @@
                         var domain = up.getOption('domain')
                         var response = JSON.parse(info.response)
                         var sourceLink = 'http://' + domain + '/' + encodeURIComponent(response.key)
-                        window.eventHub.emit('upload', {
+                        window.eventHub.emit('new', {
                             url: sourceLink,
                             name: response.key
                         })
