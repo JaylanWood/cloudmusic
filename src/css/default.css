@@ -30,3 +30,8 @@ button{font:inherit;}
 .page>main>.form>.row>label{display:flex;width:4em;justify-content:flex-end;align-items:center;margin-right:5px;}
 .page>main>.form>.row>input[type=text]{padding:3px 8px;border-radius:5px;border:1px solid #ddd;height:30px;}
 .page>main>.form>.row>input[type=button],.form input[type=submit],.form button{height:30px;padding-left:10px;padding-right:10px;border-radius:5px;}
+/* site-loading */
+.site-loading{visibility:hidden;position:fixed;width:100vw;height:100vh;z-index:2;background:rgba(0,0,0,0.2);}
+.site-loading.active{visibility:visible;}
+.site-loading::before{content:'';display:block;width:100px;height:100px;border-radius:50%;background-color:gray;position:absolute;left:50%;top:50%;margin-left:-50px;margin-top:-50px;animation:scale-center 0.8s linear infinite alternate-reverse;}
+@keyframes scale-center{0%{transform:scale(0.5);}100%{transform:scale(1);}}

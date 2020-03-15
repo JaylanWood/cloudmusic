@@ -11,10 +11,15 @@
             $el.html(this.template)
             // 根据data把<li></li>做成数组
             let {
-                songs
+                songs,
+                selectedSongID
             } = data
             let liList = songs.map((song) => {
-                return $('<li></li>').text(song.name).attr('data-song-id', song.id)
+                let $li = $('<li></li>').text(song.name).attr('data-song-id', song.id)
+                if (song.id === selectedSongID) {
+                    $li.addClass('active')
+                }
+                return $li
             })
             // 把li数组放到ul上
             $el.find('ul').empty()
@@ -25,14 +30,11 @@
         clearActive() {
             $(this.el).find('.active').removeClass('active')
         },
-        activeItem(li) {
-            let $li = $(li)
-            $li.addClass('active').siblings('.active').removeClass('active')
-        }
     }
     let model = {
         data: {
-            songs: [] // [{id:1,name:'1'},{id:2,name:'2'}]
+            songs: [], // [{id:1,name:'1'},{id:2,name:'2'}]
+            selectedSongID: undefined
         },
         find() {
             var query = new AV.Query('Song')
@@ -64,8 +66,11 @@
         bindEvents() {
             $(this.view.el).on('click', 'li', (eee) => {
                 let $li = $(eee.currentTarget)
-                this.view.activeItem($li)
                 let songID = $li.attr('data-song-id')
+                // 把选中歌曲的ID记录在model，让view渲染
+                this.model.data.selectedSongID = songID
+                this.view.render(this.model.data)
+
                 let data
                 let songs = this.model.data.songs
                 for (let i = 0; i < songs.length; i++) {

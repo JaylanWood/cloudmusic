@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CloudMusic管理页面</title>
     <link rel="stylesheet" href="./css/default.css">
+
 </head>
 
 <body>
+    <div id="stieLoading" class="site-loading"></div>
+
     <div class="page">
         <aside class="siderbar">
             <div class="newSong">
@@ -49,23 +52,7 @@
     <script src="./js/new-song.js"></script>
     <script src="./js/song-list.js"></script>
     <script src="./js/upload-song.js"></script>
-
-    <script>
-    
-        // 保存
-        // var Songlist = AV.Object.extend('SongList');
-        // var songlist = new Songlist();
-        // songlist.set({
-        //     name: 'songlist1',
-        //     cover: 'cover1',
-        //     editorID: 'editor1',
-        //     description: 'description1',
-        //     songs: ['song1', 'song2']
-        // });
-        // songlist.save().then(function (songlist) {
-        //     console.log(songlist)
-        // })
-    </script>
+    <script src="./js/loading.js"></script>
 </body>
 
 </html>
