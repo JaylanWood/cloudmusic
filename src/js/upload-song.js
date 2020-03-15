@@ -35,12 +35,11 @@
                     },
                     'BeforeUpload': function (up, file) {
                         // 每个文件上传前,处理相关的事情
-
+                        window.eventHub.emit('beforeUpload')
                     },
                     'UploadProgress': function (up, file) {
                         // 每个文件上传时,处理相关的事情
                         uploadStatus.textContent = '上传中'
-                        window.eventHub.emit('beforeUpload')
                     },
                     'FileUploaded': function (up, file, info) {
                         uploadStatus.textContent = '上传完毕'
@@ -53,7 +52,7 @@
                             url: sourceLink,
                             name: response.key
                         })
-                        console.log(sourceLink,response.key)
+                        console.log(sourceLink, response.key)
                     },
                     'Error': function (up, err, errTip) {
                         //上传出错时,处理相关的事情
