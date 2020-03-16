@@ -22,13 +22,17 @@
                     <label>封面</label>
                     <input name="cover" type="text" value="__cover__">
                 </div>
+                <div class="row">
+                    <label>歌词</label>
+                    <textarea cols=100 rows=10 name="lyrics">__lyrics__</textarea>
+                </div>
                 <div class="row actions">
                     <button type="submit">保存</button>
                 </div>
             </form>
         `,
         render(data = {}) { // data={} ES6语法 如果传的data是undefined，那就默认是空对象。
-            let placeholders = ['name', 'artist', 'url', 'id', 'cover']
+            let placeholders = ['name', 'artist', 'url', 'id', 'cover', 'lyrics']
             let html = this.template
             placeholders.map((string) => {
                 html = html.replace(`__${string}__`, data[string] || '')
@@ -50,7 +54,8 @@
             artist: '',
             url: '',
             id: '',
-            cover: ''
+            cover: '',
+            lyrics: ''
         },
         create(data) {
             var Song = AV.Object.extend('Song');
@@ -59,7 +64,8 @@
                 name,
                 artist,
                 url,
-                cover
+                cover,
+                lyrics
             } = data);
             return song.save().then((newSong) => {
                 let {
@@ -78,7 +84,8 @@
                 name: data.name,
                 artist: data.artist,
                 url: data.url,
-                cover: data.cover
+                cover: data.cover,
+                lyrics: data.lyrics
             });
             return song.save().then((response) => {
                 Object.assign(this.data, data)
@@ -108,7 +115,7 @@
             })
         },
         create() {
-            let needs = ['name', 'artist', 'url', 'cover']
+            let needs = ['name', 'artist', 'url', 'cover', 'lyrics']
             let data = {}
             needs.map((string) => {
                 data[string] = this.view.$el.find(`[name="${string}"]`).val()
@@ -123,7 +130,7 @@
             })
         },
         update() {
-            let needs = ['name', 'artist', 'url', 'cover']
+            let needs = ['name', 'artist', 'url', 'cover', 'lyrics']
             let data = {}
             needs.map((string) => {
                 data[string] = this.view.$el.find(`[name="${string}"]`).val()
